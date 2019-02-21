@@ -1,0 +1,10 @@
+http://www.spoj.com/problems/RMQSQ/
+http://www.spoj.com/problems/DQUERY/
+http://codeforces.com/problemset/problem/221/D
+http://codeforces.com/problemset/problem/86/D
+https://www.hackerearth.com/practice/algorithms/searching/binary-search/practice-problems/algorithm/kriti-and-her-birthday-gift/
+** https://www.hackerearth.com/problem/algorithm/substrings-count-3/activity/
+https://www.urionlinejudge.com.br/judge/pt/problems/view/1301
+http://www.spoj.com/problems/RACETIME/
+http://codeforces.com/problemset/problem/622/C
+http://codeforces.com/contest/375/problem/D
