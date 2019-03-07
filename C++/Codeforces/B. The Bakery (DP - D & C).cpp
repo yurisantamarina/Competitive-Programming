@@ -18,7 +18,7 @@ void del(int pos){
 	if(f[val] == 0) cost--;
 }
 
-int arrumaessaporra(int l, int r){
+int arruma(int l, int r){
 	while(L < l) del(L++);
 	while(L > l) add(--L);
 	while(R <= r) add(R++);
@@ -35,7 +35,7 @@ void calc(int k, int l, int r, int optL, int optR){
 	dp[k][mid] = 0;
 	int lim = min(mid-1, optR);
 	for(int i = optL; i <= lim; i++){
-		c = arrumaessaporra(i+1, mid);
+		c = arruma(i+1, mid);
 		if(dp[k-1][i] + c > dp[k][mid]){
 			dp[k][mid] = dp[k-1][i] + c;
 			opt = i;
@@ -56,7 +56,7 @@ int main(){
 	L = 1;
 	R = 1;
 	for (int i = 1; i <= n; i++)
-		dp[1][i] = arrumaessaporra(1, i);
+		dp[1][i] = arruma(1, i);
 	
 	for (int i = 2; i <= k; i++)
 		calc(i, 1, n, 1, n);
