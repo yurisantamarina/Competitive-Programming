@@ -1,17 +1,17 @@
-#include <bits/stdc++.h>
+            #include <bits/stdc++.h>
 
 using namespace std;
-#define gc getchar_unlocked // ou usar só getchar
+            #define gc getchar_unlocked // ou usar só getchar
 
 void scanint(int &x)
 {
-    register int c = gc();
-    x = 0;
-    for(;(c<48 || c>57);c = gc());
+  register int c = gc();
+  x = 0;
+  for(;(c<48 || c>57);c = gc());
     for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
-}
+  }
 
-#define MAXN 200010
+            #define MAXN 200010
 int val[MAXN], size_sub[MAXN], ini[MAXN];
 vector<int> euler;
 vector<int> g[MAXN];
@@ -21,70 +21,70 @@ int tempo = 1;
 vector<int> all_w;
 
 struct Node {
-	Node *nxt[2];
-	int counter;
-	Node() {
-		nxt[0] = nxt[1] = NULL;
-		counter = 0;
-	}
+ Node *nxt[2];
+ int counter;
+ Node() {
+  nxt[0] = nxt[1] = NULL;
+  counter = 0;
+}
 };
 
 const int MAX_LEN = 21;
 
 struct Trie {
-	Node *root;
-	Trie() {
-		root = new Node();
-	}
+ Node *root;
+ Trie() {
+  root = new Node();
+}
 
-  Trie(Node *r) {
-    root = r;
+Trie(Node *r) {
+  root = r;
+}
+
+void del(Node *t) {
+  queue<Node*> q;
+  if (t->nxt[0]) q.push(t->nxt[0]);
+  if (t->nxt[1]) q.push(t->nxt[1]);
+
+  while (!q.empty()) {
+    Node *at = q.front();
+    q.pop();
+    if (at->nxt[0]) q.push(at->nxt[0]);
+    if (at->nxt[1]) q.push(at->nxt[1]);
+    delete at;
   }
+}
 
-  void del(Node *t) {
-    queue<Node*> q;
-    if (t->nxt[0]) q.push(t->nxt[0]);
-    if (t->nxt[1]) q.push(t->nxt[1]);
+void del() {
+  del(root);
+}
 
-    while (!q.empty()) {
-      Node *at = q.front();
-      q.pop();
-      if (at->nxt[0]) q.push(at->nxt[0]);
-      if (at->nxt[1]) q.push(at->nxt[1]);
-      delete at;
+Node* clona(Node *at) {
+  Node *nw = new Node();
+  nw->nxt[0] = at->nxt[0];
+  nw->nxt[1] = at->nxt[1];
+  nw->counter = at->counter;
+  return nw;
+}
+
+Node* update(int w) {
+  Node *clone = clona(root);
+  Node *new_root = clone;
+
+  clone->counter++;
+  for (int i = MAX_LEN - 1; i >= 0; i--) {
+    int bit = (w & (1 << i)) > 0;
+    if (clone->nxt[bit]) {
+      clone->nxt[bit] = clona(clone->nxt[bit]);
+    } else {
+      clone->nxt[bit] = new Node();
     }
-  }
-
-  void del() {
-    del(root);
-  }
-
-	Node* clona(Node *at) {
-		Node *nw = new Node();
-		nw->nxt[0] = at->nxt[0];
-		nw->nxt[1] = at->nxt[1];
-		nw->counter = at->counter;
-		return nw;
-	}
-
-	Node* update(int w) {
-		Node *clone = clona(root);
-    Node *new_root = clone;
-
+    clone = clone->nxt[bit];
     clone->counter++;
-    for (int i = MAX_LEN - 1; i >= 0; i--) {
-      int bit = (w & (1 << i)) > 0;
-      if (clone->nxt[bit]) {
-        clone->nxt[bit] = clona(clone->nxt[bit]);
-      } else {
-        clone->nxt[bit] = new Node();
-      }
-      clone = clone->nxt[bit];
-      clone->counter++;
-    }
+  }
 
-    return new_root;
-	}
+  return new_root;
+}
 };
 
 struct Segtree {
@@ -246,5 +246,5 @@ int main() {
     }
   }
 
-	return 0;
+  return 0;
 }
