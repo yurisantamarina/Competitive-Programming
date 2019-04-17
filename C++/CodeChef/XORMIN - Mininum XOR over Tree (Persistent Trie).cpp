@@ -1,17 +1,17 @@
-            #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
-            #define gc getchar_unlocked // ou usar só getchar
+#define gc getchar_unlocked // ou usar só getchar
 
 void scanint(int &x)
 {
   register int c = gc();
   x = 0;
   for(;(c<48 || c>57);c = gc());
-    for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
-  }
+  for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+}
 
-            #define MAXN 200010
+#define MAXN 200010
 int val[MAXN], size_sub[MAXN], ini[MAXN];
 vector<int> euler;
 vector<int> g[MAXN];
