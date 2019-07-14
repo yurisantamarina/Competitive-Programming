@@ -1,5 +1,8 @@
 def dfs(u):
     seen[u] = 1
+    if not u in g:
+        seen[u] = 2
+        return False
 
     ans = False
     for v in g[u]:
@@ -11,9 +14,12 @@ def dfs(u):
     return ans
 
 def add_edge(u, v):
-    g[u].append(v)
+    if u in g:
+        g[u].append(v)
+    else:
+        g[u] = [v]
 
-g = []
+g = {}
 seen = []
 
 tc = int(input())
@@ -23,7 +29,6 @@ for C in range(tc):
     m = line[1]
 
     g.clear()
-    g = [[] for i in range(n + 2)]
     seen = [0] * (n + 2)
     
     for i in range(m):
